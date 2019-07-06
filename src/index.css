@@ -1,14 +1,86 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+*,
+::before,
+::after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #709b90;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+/*
+body * + * {
+    margin-top: 1.0em;
+}
+*/
+
+.container {
+    max-width: 3000px;
+    /*    margin: 0 auto;*/
+    margin: 0;
+}
+
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+}
+
+.book_list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.tile {
+    display: flex;
+/*    justify-content: space-between;*/
+/*    height: 25em; */
+    padding: .3em;
+    background-color: #fff;
+    border-radius: .8em;
+    margin-top: .5em;
+}
+
+.descr {
+    margin-top: 0;
+    flex-basis: 80%;
+    flex-growth: 1;
+}
+
+.book_img {
+    margin-top: 0;
+    margin-right: 0;
+    margin: 0;
+/*    margin-left: auto; */
+    padding: 0;
+    flex-basis: 20%;
+    border-style: solid;
+}
+
+.tags {
+    display: flex;
+    padding: .5em;
+    list-style-type: none;
+    background-color: #5f4b44;
+    border-radius: .2em;
+}
+
+
+.tags > li {
+    display: block;
+    padding: .5em 1em;
+    background-color: #cc6b5a;
+    color: white;
+    text-decoration: none;
+}
+
+.tags > li + li {
+    margin-left: 1.5em;
 }
