@@ -1,19 +1,8 @@
 import React from "react";
 import { useFetch } from "./hooks";
-import "./Photos.css"
 
 function Photos() {
-  const [data, loading] = useFetch(
-    "/api/10?q=1"
-  );
-  var cardStyle = {
-   height: 800,
-   width: 400,
-   padding: 0,
-   backgroundColor: "#FFF",
-   WebkitFilter: "drop-shadow(0px 0px 5px #666)",
-   filter: "drop-shadow(0px 0px 5px #666)"
-  };
+  const [data, loading] = useFetch("/api/10?q=1");
   return (
     <>
       {loading ? (
@@ -41,7 +30,7 @@ function Photos() {
 		      </ul>
 		</div>
 		    <div className="book_img">
-		    <img src={coverurl} />
+		    <img src={coverurl} alt="Book Cover" />
 		    </div>
             </li>
           ))}
