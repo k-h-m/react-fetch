@@ -1,15 +1,36 @@
 import React from "react";
-import { useFetch } from "./hooks";
+import { useState, useEffect } from 'react';
+import useInfiniteScroll from "./InfiniteScroll";
+
 
 function Photos() {
-  const [data, loading] = useFetch("/api/10?q=1");
+  const limit = 20;
+  const initial_offset = 0;
+  const [listItems, setListItems] = useState([]);
+  const [offset, setOffset] = useState(initial_offset);
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchUrl);
+
+  async function fetchUrl() {
+    console.log("start_fetch");
+    const  url = `/api/10?offset=${offset}&limit=${limit}`;
+    const response = await fetch(url);
+    const json = await response.json();
+    setOffset(offset + limit);
+    setListItems(prevList => prevList.concat(json));
+    console.log(`stop_fetch offset=${offset}`);
+    setIsFetching(false);
+  }
+
+  useEffect(() => {
+     fetchUrl();
+  }, []);
+
+
   return (
     <>
-      {loading ? (
-        "Loading..."
-      ) : (
-        <ul className="book_list">
-              {data.map(({ id, title, publisher, year, author, coverurl, language }) => (
+          <ul className="book_list">
+	  
+              {listItems.map(({ id, title, publisher, year, author, coverurl, language }) => (
 		    <li key={`photo-${id}`} className="tile">
 		    <div className="descr">
 		      <h1>{title}</h1>
@@ -35,7 +56,7 @@ function Photos() {
             </li>
           ))}
         </ul>
-      )}
+        {isFetching && 'Fetching more list items...'}
     </>
   );
 }
