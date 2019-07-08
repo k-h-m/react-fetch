@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import {useState} from 'react';
 import useInfiniteScroll from "./InfiniteScroll";
 
 
@@ -11,27 +11,20 @@ function Photos() {
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchUrl);
 
   async function fetchUrl() {
-    console.log("start_fetch");
     const  url = `/api/10?offset=${offset}&limit=${limit}`;
     const response = await fetch(url);
     const json = await response.json();
     setOffset(offset + limit);
     setListItems(prevList => prevList.concat(json));
-    console.log(`stop_fetch offset=${offset}`);
     setIsFetching(false);
   }
-
-  useEffect(() => {
-     fetchUrl();
-  }, []);
-
 
   return (
     <>
           <ul className="book_list">
 	  
               {listItems.map(({ id, title, publisher, year, author, coverurl, language }) => (
-		    <li key={`photo-${id}`} className="tile">
+		    <li key={id} className="tile">
 		    <div className="descr">
 		      <h1>{title}</h1>
 		      <ul>
