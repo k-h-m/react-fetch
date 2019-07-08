@@ -5,17 +5,14 @@ import useInfiniteScroll from "./InfiniteScroll";
 
 function Photos() {
   const limit = 20;
-  const initial_offset = 0;
   const [listItems, setListItems] = useState([]);
-  const [offset, setOffset] = useState(initial_offset);
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchUrl);
 
   async function fetchUrl() {
-    const  url = `/api/10?offset=${offset}&limit=${limit}`;
+    const  url = `/api/10?offset=${listItems.length}&limit=${limit}`;
     const response = await fetch(url);
-    const json = await response.json();
-    setOffset(offset + limit);
-    setListItems(prevList => prevList.concat(json));
+    const data = await response.json();
+    setListItems(listItems.concat(data));
     setIsFetching(false);
   }
 
