@@ -4,7 +4,7 @@ import useInfiniteScroll from "./InfiniteScroll";
 
 
 function Photos() {
-  const limit = 20;
+  const limit = 500;
   const [listItems, setListItems] = useState([]);
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchUrl);
 
@@ -41,7 +41,7 @@ function Photos() {
 		      </ul>
 		</div>
 		    <div className="book_img">
-		    <img src={coverurl} alt="Book Cover" />
+		    <img src={coverurl} alt="Book Cover is unavailable" />
 		    </div>
             </li>
           ))}
